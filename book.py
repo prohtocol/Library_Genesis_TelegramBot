@@ -37,24 +37,24 @@ def link_to_get(link):
 def book_get(name, mainres=25, results=5):
     """This function returns the list of books for the given name
 
-        You can give in name : 
+        You can give in name :
                         1. title of book
                         2. isbn of book
                         3. author of book
                         4. publisher of book
-        
+
         mainres :
                 1. 25
                 2. 50
                 3. 100
 
         Results:
-                    [   0.Book Name, 
+                    [   0.Book Name,
                         1.Author,
-                        2.Publisher, 
-                        3.Size, 
-                        4.Book Type, 
-                        5.Book Link, 
+                        2.Publisher,
+                        3.Size,
+                        4.Book Type,
+                        5.Book Link,
                         6.Book Image Link
                         7.Language]"""
     Books = []
@@ -73,7 +73,7 @@ def book_get(name, mainres=25, results=5):
 
     if "Search string must contain minimum 3 characters.." in bs_html.body:
         return "Error: Title Too Short"
-    
+
     # scraping the site for response
     table = bs_html.find_all("table")
     table = table[2]
@@ -116,8 +116,8 @@ def book_get(name, mainres=25, results=5):
                 type_row = table_datas[8]
                 type_ofit = type_row.get_text()
                 # this will only take pdfs in English Language
-                if (type_ofit != "pdf" and type_ofit != "epub") or language != "English":
-                    continue
+                # if (type_ofit != "pdf" and type_ofit != "epub") or language != "English":
+                #     continue
                 book_lst.append(book_name)
                 book_lst.append(author)
                 book_lst.append(publisher)
@@ -134,7 +134,7 @@ def book_get(name, mainres=25, results=5):
             return "Error: no results found"
     else:
         return "Error: no results found"
-    
+
 
 
 if __name__ == "__main__":
